@@ -1,0 +1,3 @@
+[1m[31mERROR   [0m screenpy:stdout_adapter.py:50     ***ERROR***
+
+DeliveryError: Encountered an issue while attempting to click Localizador menu: ElementNotInteractableException
