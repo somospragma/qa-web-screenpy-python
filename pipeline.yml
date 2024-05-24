@@ -1,0 +1,30 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+    architecture: 'x64'
+
+- script: python -m pip install -r requirements.txt 
+  displayName: 'Install dependencies'
+
+- script: sudo apt install google-chrome-stable
+  displayName: 'Install Chrome'
+
+- script: pytest features/ --alluredir="$(System.DefaultWorkingDirectory)\allure-report"
+
+- task: PublishAllureReport@1
+  inputs:
+    reportDir: '$(System.DefaultWorkingDirectory)\allure-report'
+  displayName: 'Run tests'
