@@ -8,8 +8,14 @@ screenpy = "*"
 screenpy-selenium = "*"
 screenpy-adapter-allure = "*"
 webdriver-manager = "*"
+python-dotenv = "*"
 
 [dev-packages]
+safety = "*"
+bandit = "*"
+pre-commit = "*"
+flake8 = "*"
+black = "*"
 
 [requires]
 python_version = "3.12"

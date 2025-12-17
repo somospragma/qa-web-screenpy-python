@@ -1,84 +1,28 @@
+# Proyecto base de Pragma
 
+Este repositorio cuenta con la siguiente estructura base para su documentación:
 
-<h1 align="center">
-  <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://f.hubspotusercontent20.net/hubfs/2829524/Copia%20de%20LOGOTIPO_original-2.png"></a>
-  <br>
-  Pragma
-  <br>
-</h1>
+- catalog-info.yaml
+- docs
+  - index.md
+  - topicos.md
+  - tecnologias.md
+  - consideraciones.md
+  - instalacion.md
+  - descarga.md
+  - tests.md
+- mkdocs.yaml
 
-<h4 align="center">Proyecto base de <a href="https://github.com/ScreenPyHQ/screenpy_selenium" target="_blank">Pragma</a>.</h4>
+## Estructura
 
-Breve descripción del proyecto
-<p align="center">
-  <a href="#topicos">Topicos</a> •
-  <a href="#instalación-y-ejecución">Instalación y ejecución</a> •
-  <a href="#descarga">Descarga</a> •
-  <a href="#download">Descripción</a> •
-  <a href="#download">Consideraciones</a> •
-  <a href="#download">Tecnologias</a> •
-  <a href="#credits">Autores</a> •
-  <a href="#related">Relacionados</a> •
-  <a href="#roadmap">Roadmap</a>
-</p>
+### catalog-info.yaml
+Este archivo es necesario pensando en una plataforma de ingeniería (Backstage), con la intención de centralizar y visualizar todos los repositorios de una manera diferente a lo que puede proveer Github. Dentro del mismo documento se encontrarán enlaces a la documentación oficial que indicará el significado de cada uno de los parámetros solicitados.
 
-## Topicos
+### /docs
+Dentro de la carpeta docs se encontrarán las diferentes partes de un readme con un pequeño ejemplo dentro de cada una de ellas.
 
-* Python
-* Pytest
-* Selenium
-* Screenpy
-* Screenpy-selenium
+### mkdocs.yaml
+Este documento contiene la ruta de navegación estructurada de los diferentes archivos que están dentro de la carpeta docs. Esto para una mejor categorización y vizualización de la documentación dentro de la plataforma de ingeniería.
 
-## Instalación y ejecución
-
-Para clonar y ejecutar está aplicación, necesitas [Git](https://git-scm.com) y [Python](https://www.python.org//) instalados en tu equipo y desde la linea de comandos ejecutar lo siguiente:
-
-```bash
-# Clone this repository
-$ git clone https://github.com/somospragma/qa-web-screenpy-python.git
-
-# Install Python virtual environment for the project 
-$ pipenv install
-$ pipenv shell
-
-# Install dependencies
-pipenv install screenpy-selenium
-pipenv install screenpy-adapter-allure
-
-# Run tests 
-$ pytest features/ --alluredir='D:\Tutorial\screenpy-selenium\allure-report'
-
-# View report
-$ allure serve <allure-report-dir>
-```
-
-
-
-
-## Descarga
-
-Puedes descargar el proyecto en el enlace [download](https://github.com/amitmerchant1990/electron-markdownify/releases/tag/v1.2.0) 
-
-## Consideraciones
-El proyecto usa como servicio base el servicio demo Reqres, el correcto funcionamiento de los casos de uso dependeran de la disponibilidad del servicio demo en cuestion
-
-## Tecnologias
--   [Python]
--   [Selenium]
--   [Screenpy]
-
-
-## Autores
-
-- Jorge Ardila Camargo
-
-## Relacionados
-
-- [Proyecto screenpy Base](https://github.com/ScreenPyHQ/screenpy_examples/tree/trunk/screenpy_selenium/github)
-
-
-## Roadmap
-
-- [Guia QA](https://github.com/amitmerchant1990/pomolectron) - (En construcción) Una guia de proyectos Orientados a la Calidad de Software
+> **[Nota]**  
+> Este README es utilizado para dar claridad sobre la documentación de este repositorio y la estructuración de la misma, toda la documentación del repositorio se encuentra en la carpeta /docs.

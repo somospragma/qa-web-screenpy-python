@@ -1,30 +1,73 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Pipeline de Testing con Análisis de Seguridad
+# Pipeline mejorado con análisis SAST, SCA y mejores prácticas de seguridad
 
 trigger:
 - master
+- main
 
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  TARGET_URL: 'https://www.pragma.co/es/'
+  HEADLESS_MODE: 'true'
+
 steps:
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '3.x'
+    versionSpec: '3.12'
     addToPath: true
     architecture: 'x64'
+  displayName: 'Setup Python 3.12'
 
-- script: python -m pip install -r requirements.txt 
+- script: |
+    python -m pip install --upgrade pip
+    python -m pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script: sudo apt install google-chrome-stable
+- script: sudo apt-get update && sudo apt-get install -y google-chrome-stable
   displayName: 'Install Chrome'
 
-- script: pytest features/ --alluredir="$(System.DefaultWorkingDirectory)\allure-report"
+# Análisis de Seguridad de Dependencias (SCA)
+- script: |
+    safety check --json --output safety-report.json || true
+    safety check
+  displayName: 'Security check dependencies (SCA)'
+  continueOnError: true
 
+# Análisis Estático de Código (SAST)
+- script: |
+    bandit -r . -f json -o bandit-report.json || true
+    bandit -r . -ll
+  displayName: 'SAST analysis with Bandit'
+  continueOnError: true
+
+# Análisis de Calidad de Código
+- script: |
+    flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+  displayName: 'Code quality analysis'
+  continueOnError: true
+
+# Ejecución de Tests
+- script: |
+    pytest features/ --alluredir="$(System.DefaultWorkingDirectory)/allure-results" --tb=short
+  displayName: 'Run automated tests'
+  env:
+    TARGET_URL: $(TARGET_URL)
+    HEADLESS_MODE: $(HEADLESS_MODE)
+
+# Publicar Reportes de Seguridad
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/safety-report.json'
+    testRunTitle: 'Security Dependency Analysis'
+  condition: always()
+  displayName: 'Publish Security Reports'
+
+# Publicar Reporte de Allure
 - task: PublishAllureReport@1
   inputs:
-    reportDir: '$(System.DefaultWorkingDirectory)\allure-report'
-  displayName: 'Run tests'
+    reportDir: '$(System.DefaultWorkingDirectory)/allure-results'
+  displayName: 'Publish Allure Test Report'
+  condition: always()

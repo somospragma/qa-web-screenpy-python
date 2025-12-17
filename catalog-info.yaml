@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: qa-web-screenpy-python
+  title: QA Web ScreenPy Python
+  description: Framework de testing automatizado web basado en ScreenPy y Selenium
+  annotations:
+    github.com/project-slug: somospragma/qa-web-screenpy-python
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: library
+  lifecycle: production
+  owner: qa-team
+  system: testing-framework
+  providesApis:
+    - qa-automation-api
+  consumesApis:
+    - pragma-web-api
+  dependsOn:
+    - component:selenium-grid
+    - component:allure-server

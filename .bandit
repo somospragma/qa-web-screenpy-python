@@ -1,0 +1,17 @@
+[bandit]
+exclude_dirs = [
+    "allure-report",
+    "allure-results", 
+    "__pycache__",
+    ".pytest_cache",
+    "venv",
+    ".venv"
+]
+
+skips = [
+    "B101"  # Skip assert_used test
+]
+
+# Configuración de severidad
+confidence = medium
+severity = medium

@@ -1,0 +1,42 @@
+site_name: QA Web ScreenPy Python
+site_description: Framework de testing automatizado web basado en ScreenPy y Selenium
+site_author: Pragma QA Team
+site_url: https://somospragma.github.io/qa-web-screenpy-python
+
+repo_name: somospragma/qa-web-screenpy-python
+repo_url: https://github.com/somospragma/qa-web-screenpy-python
+
+nav:
+  - Inicio: index.md
+  - Tópicos: topicos.md
+  - Tecnologías: tecnologias.md
+  - Instalación: instalacion.md
+  - Descarga: descarga.md
+  - Tests: tests.md
+  - Consideraciones: consideraciones.md
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - techdocs-core
